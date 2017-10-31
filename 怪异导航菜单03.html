@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>怪异导航菜单的实现-Kery老师</title>
+	<style>
+		*{padding:0;margin:0;}
+		a{text-decoration: none;}
+		body{padding: 50px;}
+		#container{height: 36px;/*background: pink;*/display: inline-block;counter-reset: flag;box-shadow: 2px 2px 1em #111;}
+		#container a{line-height: 36px;display: block;float: left;padding:0 20px 0 50px;/*border-right:3px solid #ccc;*/position: relative;background:linear-gradient(#333,#212B38);color: #fff;}
+		#container a:before{content:counter(flag);counter-increment: flag;width:20px;height:20px;background: linear-gradient(#7BC625,#3C3A3A);line-height: 20px;text-align: center;display: inline-block;position: relative;color:#fff;left:-14px;border-radius: 50%;font-weight: bold;}
+		#container a:first-child:before{background: green;}
+		#container a:last-child:before{background: red;}
+		#container a:nth-child(1):before{background: orange;}
+		/*#container p:nth-of-type(1){background: orange}*/
+
+		#container a:after{content:"";width:36px;height:36px;position: absolute;transform: rotate(45deg) scale(0.68);z-index: 1;right: -18px;background:linear-gradient(135deg,#333,#212B38);box-shadow: 2px -2px 0 2px rgba(0,0,0,0.4),3px -3px 0 2px rgba(255,255,255,0.1);}
+
+
+		#container a.active,#container a:hover{background:linear-gradient(#009688,#000);}
+		#container a.active:after,#container a:hover:after{background: linear-gradient(135deg,#009688,#000);}
+	</style>
+</head>
+<body>
+	
+	<div id="container">
+		<a href="#" class="active">asd</a>
+		<a href="javascript:void(0);" onclick="clickme();">2asd222</a>
+		<a href="#">3asd3</a>
+		<a href="#">asd</a>
+		<a href="#">asd</a>
+	</div>
+
+
+
+	<!-- <div id="box" style="width:36px;height:36px;background:red;"></div> -->
+
+	<script>
+		var oContainer = document.getElementById("container");
+		var oChilds = oContainer.children;
+		for(var i=0;i<oChilds.length;i++){
+			oChilds[i].onmouseover = function(){
+				this.className = "active";
+				//同辈元素移除class
+				siblings(this,function(){
+					this.className = "";
+				});
+			};
+		}
+		function siblings(obj,callback){
+			var oParents = obj.parentNode;
+			var pChilds = oParents.children;
+			for(var i=0;i<pChilds.length;i++){
+				if(obj!=pChilds[i])callback.call(pChilds[i]);
+			}
+		}
+		function clickme(){
+			console.log("点我了 哦");
+		};
+	</script>
+</body>
+</html>

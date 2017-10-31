@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>怪异导航菜单的实现-Kery老师</title>
+	<style>
+		*{padding:0;margin:0;}
+		a{text-decoration: none;}
+		body{padding: 50px;}
+		#container{height: 36px;background: pink;display: inline-block;counter-reset: flag;}
+		#container a{line-height: 36px;display: block;float: left;padding:0 10px 0 50px;border-right:3px solid #ccc;}
+		#container a:before{content:counter(flag);counter-increment: flag;width:20px;height:20px;background: #111;line-height: 20px;text-align: center;display: inline-block;position: relative;color:#fff;left:-14px;border-radius: 50%;font-weight: bold;}
+		#container a:first-child:before{background: green;}
+		#container a:last-child:before{background: red;}
+		#container a:nth-child(1):before{background: orange;}
+		/*#container p:nth-of-type(1){background: orange}*/
+
+		#container a:hover{background: green;}
+	</style>
+</head>
+<body>
+	
+	<div id="container">
+		<a href="#">asd</a>
+		<a href="#">2asd222</a>
+		<a href="#">3asd333</a>
+		<a href="#">asd</a>
+		<a href="#">asd</a>
+	</div>
+</body>
+</html>
